@@ -15,10 +15,10 @@ renamed as (
         user_id,
         product_id,
         session_id,
-        created_at,
+        created_at as created_at_utc,
         order_id,
         _fivetran_deleted,
-        _fivetran_synced as date_load
+        _fivetran_synced AS date_load_utc
 
     from source
 

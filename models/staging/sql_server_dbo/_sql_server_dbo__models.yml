@@ -2,9 +2,6 @@ version: 2
 
 models:
   - name: stg_sql_server_dbo__addresses
-    config:
-      contract:
-        enforced: true
     description: ""
     columns:
       - name: address_id
@@ -31,14 +28,11 @@ models:
         data_type: boolean
         description: ""
 
-      - name: date_load
+      - name: date_load_utc
         data_type: timestamp_tz
         description: ""
 
   - name: stg_sql_server_dbo__events
-    config:
-      contract:
-        enforced: true
     description: ""
     columns:
       - name: event_id
@@ -65,7 +59,7 @@ models:
         data_type: varchar
         description: ""
 
-      - name: created_at
+      - name: created_at_utc
         data_type: timestamp_ntz
         description: ""
 
@@ -77,14 +71,11 @@ models:
         data_type: boolean
         description: ""
 
-      - name: date_load
+      - name: date_load_utc
         data_type: timestamp_tz
         description: ""
 
   - name: stg_sql_server_dbo__order_items
-    config:
-      contract:
-        enforced: true
     description: ""
     columns:
       - name: order_id
@@ -103,14 +94,11 @@ models:
         data_type: boolean
         description: ""
 
-      - name: date_load
+      - name: date_load_utc
         data_type: timestamp_tz
         description: ""
 
   - name: stg_sql_server_dbo__orders
-    config:
-      contract:
-        enforced: true
     description: ""
     columns:
       - name: order_id
@@ -121,7 +109,7 @@ models:
         data_type: varchar
         description: ""
 
-      - name: shipping_cost
+      - name: shipping_cost_dollars
         data_type: float
         description: ""
 
@@ -129,7 +117,7 @@ models:
         data_type: varchar
         description: ""
 
-      - name: created_at
+      - name: created_at_utc
         data_type: timestamp_tz
         description: ""
 
@@ -169,14 +157,11 @@ models:
         data_type: boolean
         description: ""
 
-      - name: date_load
+      - name: date_load_utc
         data_type: timestamp_tz
         description: ""
 
   - name: stg_sql_server_dbo__products
-    config:
-      contract:
-        enforced: true
     description: ""
     columns:
       - name: product_id
@@ -199,17 +184,18 @@ models:
         data_type: boolean
         description: ""
 
-      - name: date_load
+      - name: date_load_utc
         data_type: timestamp_tz
         description: ""
 
   - name: stg_sql_server_dbo__promos
-    config:
-      contract:
-        enforced: true
     description: ""
     columns:
       - name: promo_id
+        data_type: varchar
+        description: ""
+
+      - name: promo_name
         data_type: varchar
         description: ""
 
@@ -217,7 +203,7 @@ models:
         data_type: number
         description: ""
 
-      - name: status
+      - name: promo_status_id
         data_type: varchar
         description: ""
 
@@ -225,14 +211,11 @@ models:
         data_type: boolean
         description: ""
 
-      - name: date_load
+      - name: date_load_utc
         data_type: timestamp_tz
         description: ""
 
   - name: stg_sql_server_dbo__users
-    config:
-      contract:
-        enforced: true
     description: ""
     columns:
       - name: user_id
@@ -251,7 +234,7 @@ models:
         data_type: varchar
         description: ""
 
-      - name: created_at
+      - name: created_at_utc
         data_type: timestamp_tz
         description: ""
 
@@ -275,6 +258,39 @@ models:
         data_type: boolean
         description: ""
 
-      - name: date_load
+      - name: date_load_utc
         data_type: timestamp_tz
         description: ""  
+
+  - name: stg_sql_server_dbo__shipping_service
+    description: ""
+    columns:
+      - name: shipping_service_id
+        data_type: varchar
+        description: ""
+
+      - name: shipping_service
+        data_type: varchar
+        description: ""
+
+  - name: stg_sql_server_dbo__order_status
+    description: ""
+    columns:
+      - name: order_status_id
+        data_type: varchar
+        description: ""
+
+      - name: order_status
+        data_type: varchar
+        description: ""
+
+  - name: stg_sql_server_dbo__promo_status
+    description: ""
+    columns:
+      - name: promo_status_id
+        data_type: varchar
+        description: ""
+
+      - name: promo_status
+        data_type: varchar
+        description: ""
