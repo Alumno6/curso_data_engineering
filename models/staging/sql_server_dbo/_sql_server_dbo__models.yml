@@ -1,0 +1,330 @@
+version: 2
+
+models:
+  - name: stg_sql_server_dbo__addresses
+    description: ""
+    columns:
+      - name: address_id
+        data_type: varchar
+        description: ""
+        tests:
+          - not_null
+          - unique
+
+      - name: zipcode
+        data_type: number
+        description: ""
+        tests:
+          - positive_values
+
+      - name: country
+        data_type: varchar
+        description: ""
+
+      - name: address
+        data_type: varchar
+        description: ""
+
+      - name: state
+        data_type: varchar
+        description: ""
+
+      - name: _fivetran_deleted
+        data_type: boolean
+        description: ""
+
+      - name: date_load_utc
+        data_type: timestamp_tz
+        description: ""
+
+  - name: stg_sql_server_dbo__events
+    description: ""
+    columns:
+      - name: event_id
+        data_type: varchar
+        description: ""
+        tests:
+         - not_null
+         - unique
+         
+      - name: page_url
+        data_type: varchar
+        description: ""
+
+      - name: event_type
+        data_type: varchar
+        description: ""
+
+      - name: user_id
+        data_type: varchar
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_sql_server_dbo__users')
+              field: 'user_id'
+
+      - name: product_id
+        data_type: varchar
+        description: ""
+        tests:
+          - relationships:
+              to: ref('stg_sql_server_dbo__products')
+              field: 'product_id'        
+
+      - name: session_id
+        data_type: varchar
+        description: ""
+
+      - name: created_at_utc
+        data_type: timestamp_ntz
+        description: ""
+
+      - name: order_id
+        data_type: varchar
+        description: ""
+        tests:
+          - relationships:
+              to: ref('stg_sql_server_dbo__orders')
+              field: 'order_id'          
+
+      - name: _fivetran_deleted
+        data_type: boolean
+        description: ""
+
+      - name: date_load_utc
+        data_type: timestamp_tz
+        description: ""
+
+  - name: stg_sql_server_dbo__order_items
+    description: ""
+    columns:
+      - name: order_id
+        data_type: varchar
+        description: ""
+
+      - name: product_id
+        data_type: varchar
+        description: ""
+
+      - name: quantity
+        data_type: number
+        description: ""
+
+      - name: _fivetran_deleted
+        data_type: boolean
+        description: ""
+
+      - name: date_load_utc
+        data_type: timestamp_tz
+        description: ""
+
+  - name: stg_sql_server_dbo__orders
+    description: ""
+    columns:
+      - name: order_id
+        data_type: varchar
+        description: ""
+
+      - name: shipping_service_id
+        data_type: varchar
+        description: ""
+        tests:
+          - relationships:
+              to: ref('stg_sql_server_dbo','shipping_service')
+              field: 'shipping_service_id'  
+
+      - name: shipping_cost_dollars
+        data_type: float
+        description: ""
+
+      - name: address_id
+        data_type: varchar
+        description: ""
+        tests:
+          - relationships:
+              to: ref('stg_sql_server_dbo','addresses')
+              field: ref('addreses_id')
+
+      - name: created_at_utc
+        data_type: timestamp_tz
+        description: ""
+
+      - name: promo_id
+        data_type: varchar
+        description: ""
+
+
+      - name: estimated_delivery_at
+        data_type: timestamp_tz
+        description: ""
+
+      - name: order_cost
+        data_type: float
+        description: ""
+
+      - name: user_id
+        data_type: varchar
+        description: ""
+
+      - name: order_total
+        data_type: float
+        description: ""
+
+      - name: delivered_at
+        data_type: timestamp_tz
+        description: ""
+
+      - name: tracking_id
+        data_type: varchar
+        description: ""
+
+      - name: status
+        data_type: varchar
+        description: ""
+
+      - name: _fivetran_deleted
+        data_type: boolean
+        description: ""
+
+      - name: date_load_utc
+        data_type: timestamp_tz
+        description: ""
+
+  - name: stg_sql_server_dbo__products
+    description: ""
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: ""
+
+      - name: price
+        data_type: float
+        description: ""
+
+      - name: name
+        data_type: varchar
+        description: ""
+
+      - name: inventory
+        data_type: number
+        description: ""
+
+      - name: _fivetran_deleted
+        data_type: boolean
+        description: ""
+
+      - name: date_load_utc
+        data_type: timestamp_tz
+        description: ""
+
+  - name: stg_sql_server_dbo__promos
+    description: ""
+    columns:
+      - name: promo_id
+        data_type: varchar
+        description: ""
+
+      - name: promo_name
+        data_type: varchar
+        description: ""
+
+      - name: discount
+        data_type: number
+        description: ""
+
+      - name: promo_status_id
+        data_type: varchar
+        description: ""
+
+      - name: _fivetran_deleted
+        data_type: boolean
+        description: ""
+
+      - name: date_load_utc
+        data_type: timestamp_tz
+        description: ""
+
+  - name: stg_sql_server_dbo__users
+    description: ""
+    columns:
+      - name: user_id
+        data_type: varchar
+        description: ""
+
+      - name: updated_at_utc
+        data_type: timestamp_tz
+        description: ""
+
+      - name: address_id
+        data_type: varchar
+        description: ""
+
+      - name: last_name
+        data_type: varchar
+        description: ""
+
+      - name: created_at_utc
+        data_type: timestamp_tz
+        description: ""
+
+      - name: phone_number
+        data_type: varchar
+        description: ""
+
+      - name: total_orders
+        data_type: number
+        description: ""
+
+      - name: first_name
+        data_type: varchar
+        description: ""
+
+      - name: email
+        data_type: varchar
+        description: ""
+      
+      - name: is_valid_email_address
+        data_type: boolean
+        description: "Comprueba si el email es correcto"
+
+      - name: _fivetran_deleted
+        data_type: boolean
+        description: ""
+
+      - name: date_load_utc
+        data_type: timestamp_tz
+        description: ""  
+
+  - name: stg_sql_server_dbo__shipping_service
+    description: ""
+    columns:
+      - name: shipping_service_id
+        data_type: varchar
+        description: ""
+
+      - name: shipping_service
+        data_type: varchar
+        description: ""
+
+  - name: stg_sql_server_dbo__order_status
+    description: ""
+    columns:
+      - name: order_status_id
+        data_type: varchar
+        description: ""
+
+      - name: order_status
+        data_type: varchar
+        description: ""
+
+  - name: stg_sql_server_dbo__promo_status
+    description: ""
+    columns:
+      - name: promo_status_id
+        data_type: varchar
+        description: ""
+
+      - name: promo_status
+        data_type: varchar
+        description: ""
