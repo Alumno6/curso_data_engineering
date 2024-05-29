@@ -18,6 +18,16 @@ renamed as (
 
     from source
 
+    union 
+
+    select
+        md5('') as  product_id,
+        null,
+        null,
+        null,
+        null,
+        null
 )
+
 
 select * from renamed
