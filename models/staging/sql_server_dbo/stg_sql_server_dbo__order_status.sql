@@ -14,6 +14,12 @@ renamed as (
 
     from source
 
+    union 
+
+    select
+        md5('') as order_status_id,
+        null
+
 )
 
 select * from renamed

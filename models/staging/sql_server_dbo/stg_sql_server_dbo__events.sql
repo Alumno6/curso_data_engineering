@@ -13,10 +13,13 @@ renamed as (
         page_url,
         event_type,
         user_id,
-        product_id,
+        case 
+            when product_id = '' then md5('')
+            else product_id
+        end as product_id,
         session_id,
         created_at as created_at_utc,
-        order_id,
+        iff(order_id = '', md5('sin order'),order_id) as order_id,
         _fivetran_deleted,
         _fivetran_synced AS date_load_utc
 

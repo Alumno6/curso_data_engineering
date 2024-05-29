@@ -15,6 +15,12 @@ renamed as (
     from source
     group by status
 
+    union
+
+    select
+        md5('') as promo_status_id,
+        null
+
 )
 
 select * from renamed

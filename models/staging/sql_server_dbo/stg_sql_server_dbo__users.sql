@@ -10,7 +10,7 @@ renamed as (
 
     select
         user_id,
-        updated_at,
+        updated_at as updated_at_utc,
         address_id,
         last_name,
         created_at as created_at_utc,
@@ -23,6 +23,20 @@ renamed as (
 
     from source
 
+    union
+
+    select
+        md5('') as user_id,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,        
+        null,
+        null,
+        null,
+        null
 )
 
 select * from renamed

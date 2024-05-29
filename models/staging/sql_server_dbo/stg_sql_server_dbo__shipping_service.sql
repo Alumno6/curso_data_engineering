@@ -17,6 +17,12 @@ renamed as (
     from source
     group by shipping_service
 
+    union 
+
+    select
+        md5('') as shipping_service_id,
+        null
+
 )
 
 select * from renamed

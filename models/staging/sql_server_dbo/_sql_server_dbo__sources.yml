@@ -22,6 +22,8 @@ sources:
         columns:
           - name: ADDRESS_ID
           - name: ZIPCODE
+            tests:
+              - positive_values
           - name: COUNTRY
           - name: ADDRESS
           - name: STATE

@@ -25,6 +25,16 @@ renamed as (
 
     from source
 
+    union
+    
+    select
+        md5('') as address_id,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null       
 )
 
 select * from renamed

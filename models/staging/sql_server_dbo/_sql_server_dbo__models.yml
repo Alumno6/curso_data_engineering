@@ -7,10 +7,15 @@ models:
       - name: address_id
         data_type: varchar
         description: ""
+        tests:
+          - not_null
+          - unique
 
       - name: zipcode
         data_type: number
         description: ""
+        tests:
+          - positive_values
 
       - name: country
         data_type: varchar
@@ -38,7 +43,10 @@ models:
       - name: event_id
         data_type: varchar
         description: ""
-
+        tests:
+         - not_null
+         - unique
+         
       - name: page_url
         data_type: varchar
         description: ""
@@ -50,10 +58,19 @@ models:
       - name: user_id
         data_type: varchar
         description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_sql_server_dbo__users')
+              field: 'user_id'
 
       - name: product_id
         data_type: varchar
         description: ""
+        tests:
+          - relationships:
+              to: ref('stg_sql_server_dbo__products')
+              field: 'product_id'        
 
       - name: session_id
         data_type: varchar
@@ -66,6 +83,10 @@ models:
       - name: order_id
         data_type: varchar
         description: ""
+        tests:
+          - relationships:
+              to: ref('stg_sql_server_dbo__orders')
+              field: 'order_id'          
 
       - name: _fivetran_deleted
         data_type: boolean
@@ -105,9 +126,13 @@ models:
         data_type: varchar
         description: ""
 
-      - name: shipping_service
+      - name: shipping_service_id
         data_type: varchar
         description: ""
+        tests:
+          - relationships:
+              to: ref('stg_sql_server_dbo','shipping_service')
+              field: 'shipping_service_id'  
 
       - name: shipping_cost_dollars
         data_type: float
@@ -116,6 +141,10 @@ models:
       - name: address_id
         data_type: varchar
         description: ""
+        tests:
+          - relationships:
+              to: ref('stg_sql_server_dbo','addresses')
+              field: ref('addreses_id')
 
       - name: created_at_utc
         data_type: timestamp_tz
@@ -124,6 +153,7 @@ models:
       - name: promo_id
         data_type: varchar
         description: ""
+
 
       - name: estimated_delivery_at
         data_type: timestamp_tz
@@ -222,7 +252,7 @@ models:
         data_type: varchar
         description: ""
 
-      - name: updated_at
+      - name: updated_at_utc
         data_type: timestamp_tz
         description: ""
 

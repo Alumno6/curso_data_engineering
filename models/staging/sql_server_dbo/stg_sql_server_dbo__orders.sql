@@ -9,7 +9,7 @@ source as (
 renamed as (
 
     select
-        order_id, 
+        order_id,
         md5(shipping_service) as shipping_service_id,
         shipping_cost AS shipping_cost_dollars,
         address_id,
@@ -30,6 +30,24 @@ renamed as (
 
     from source
 
+    union 
+
+    select
+        md5('sin order') as order_id,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
 )
 
 select * from renamed
