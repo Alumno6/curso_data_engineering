@@ -283,6 +283,10 @@ models:
       - name: email
         data_type: varchar
         description: ""
+      
+      - name: is_valid_email_address
+        data_type: boolean
+        description: "Comprueba si el email es correcto"
 
       - name: _fivetran_deleted
         data_type: boolean

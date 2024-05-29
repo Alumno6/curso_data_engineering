@@ -18,25 +18,12 @@ renamed as (
         total_orders,
         first_name,
         email,
+        coalesce (regexp_like(email, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')= true,false) as is_valid_email_address,
         _fivetran_deleted,
         _fivetran_synced AS date_load_utc
 
     from source
 
-    union
-
-    select
-        md5('') as user_id,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,        
-        null,
-        null,
-        null,
-        null
 )
 
 select * from renamed
