@@ -1,7 +1,7 @@
 unit_tests:
   - name: test_is_valid_email
     description: "Check if email is valid"
-    model: stg_sql_server_dbo__users
+    model: base_sql_server_dbo__users
     given:
       - input: source('sql_server_dbo', 'users')
         rows:
@@ -9,6 +9,7 @@ unit_tests:
           - {email: sdivers2p@msu.edu}
           - {email: wheinecke2l@ebay.com}
           - {email: fail_email}
+
     expect:
       rows:
         - {email: ekollaschek2q@tuttocitta.it,    is_valid_email_address: true}

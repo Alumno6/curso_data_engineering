@@ -1,11 +1,12 @@
 unit_tests:
   - name: test_is_valid_email_with_csv_fixture
     description: "Check if email is valid"
-    model: stg_sql_server_dbo__users
+    model: base_sql_server_dbo__users
     given:
       - input: source('sql_server_dbo', 'users')
         format: csv
         fixture: users_fixture
+
     expect:
       rows:
         - {email: ekollaschek2q@tuttocitta.it,    is_valid_email_address: true}
