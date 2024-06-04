@@ -1,0 +1,15 @@
+unit_tests:
+  - name: test_is_valid_email_with_csv_fixture
+    description: "Check if email is valid"
+    model: base_sql_server_dbo__users
+    given:
+      - input: source('sql_server_dbo', 'users')
+        format: csv
+        fixture: users_fixture
+
+    expect:
+      rows:
+        - {email: ekollaschek2q@tuttocitta.it,    is_valid_email_address: true}
+        - {email: sdivers2p@msu.edu,    is_valid_email_address: true}
+        - {email: wheinecke2l@ebay.com,    is_valid_email_address: true}
+        - {email: fail_email,    is_valid_email_address: false}
