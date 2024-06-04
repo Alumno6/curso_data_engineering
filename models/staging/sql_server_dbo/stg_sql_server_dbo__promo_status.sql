@@ -2,23 +2,23 @@ with
 
 source as (
 
-    select status from {{ source('sql_server_dbo', 'promos') }}
+    select * from {{ ref('base_sql_server_dbo__promos') }}
 
 ),
 
 renamed as (
 
     select
-        md5(status) as promo_status_id,
-        status as order_status
+        {{dbt_utils.generate_surrogate_key(['promo_status'])}} as promo_status_id,
+        promo_status as promo_status
 
     from source
-    group by status
+    group by promo_status
 
     union
 
     select
-        md5('') as promo_status_id,
+        {{dbt_utils.generate_surrogate_key(["''"])}} as promo_status_id,
         null
 
 )

@@ -1,28 +1,35 @@
 with 
 
-source as (
+source_users as (
 
-    select * from {{ source('sql_server_dbo', 'users') }}
+    select * from {{ ref('base_sql_server_dbo__users') }}
+
+),
+source_orders as (
+
+    select * from {{ ref('base_sql_server_dbo__orders') }}
 
 ),
 
 renamed as (
 
     select
-        user_id,
-        updated_at as updated_at_utc,
-        address_id,
-        last_name,
-        created_at as created_at_utc,
-        phone_number,
-        total_orders,
-        first_name,
-        email,
-        coalesce (regexp_like(email, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')= true,false) as is_valid_email_address,
-        _fivetran_deleted,
-        _fivetran_synced AS date_load_utc
+        U.user_id,
+        U.updated_at_utc,
+        U.address_id,
+        U.last_name,
+        U.created_at_utc,
+        U.phone_number,
+        O.total_orders,
+        U.first_name,
+        U.email,
+        coalesce (regexp_like(U.email, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')= true,false) as is_valid_email_address,
+        U._fivetran_deleted,
+        U.date_load_utc
 
-    from source
+    from source_users U
+    join (select user_id, count(order_id) as total_orders from source_orders group by user_id) O
+    on U.user_id = O.user_id  
 
 )
 

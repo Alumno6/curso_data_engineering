@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select shipping_service from {{ source('sql_server_dbo', 'orders') }}
+    select * from {{ ref('base_sql_server_dbo__orders') }}
 
 ),
 
@@ -16,12 +16,6 @@ renamed as (
         end as shipping_service
     from source
     group by shipping_service
-
-    union 
-
-    select
-        md5('') as shipping_service_id,
-        null
 
 )
 

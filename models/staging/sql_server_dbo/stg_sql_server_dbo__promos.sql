@@ -2,26 +2,26 @@ with
 
 source as (
 
-    select * from {{ source('sql_server_dbo', 'promos') }}
+    select * from {{ ref('base_sql_server_dbo__promos') }}
 
 ),
 
 renamed as (
 
     select
-        md5(promo_id) as promo_id,
-        promo_id as promo_name,
-        discount as discount,
-        md5(status) as promo_status_id,
+        promo_id,
+        promo_name,
+        discount,
+        {{dbt_utils.generate_surrogate_key(['promo_status'])}} as promo_status_id,
         _fivetran_deleted,
-        _fivetran_synced AS date_load_utc
+        date_load_utc
     from source
     union all
     select
-        md5('sin_promo'),
-        'sin_promo',
-        0,
-        md5('inactive'),
+        {{dbt_utils.generate_surrogate_key(["'sin_promo'"])}},
+        null,
+        null,
+        null,
         null,
         null
 )

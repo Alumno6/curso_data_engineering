@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select status from {{ source('sql_server_dbo', 'orders') }}
+    select * from {{ ref('base_sql_server_dbo__orders') }}
 
 ),
 
