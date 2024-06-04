@@ -19,7 +19,8 @@ renamed as (
         end as product_id,
         session_id,
         created_at as created_at_utc,
-        iff(order_id = '', md5('sin order'),order_id) as order_id,
+        --iff(order_id = '', md5('sin order'),order_id) as order_id,#}
+        {{void_to_md5('order_id', "'sin order'")}} as order_id,
         _fivetran_deleted,
         _fivetran_synced AS date_load_utc
 
