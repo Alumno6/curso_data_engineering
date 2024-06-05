@@ -13,10 +13,8 @@ stage_order_items as (
 renamed as (
 
     select
-        {{dbt_utils.generate_surrogate_key(['O.order_id','OI.product_id'])}} AS transaction_id,
         O.order_id as order_id,
-        OI.product_id as product_id,
-        OI.quantity as product_quantity,
+        count(OI.product_id) over(PARTITION BY O.ORDER_ID) AS number_of_products,
         O.shipping_service_id as shipping_service_id,
         O.shipping_cost_dollars AS order_shipping_cost_dol,
         address_id,
@@ -29,7 +27,6 @@ renamed as (
         O.delivered_at,
         O.tracking_id,
         order_status_id,
-        iff(RANK() OVER(PARTITION BY O.order_id ORDER BY OI.product_id) = 1, true, false) as agregar, 
         O._fivetran_deleted,
         O.date_load_utc
 
