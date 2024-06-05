@@ -13,7 +13,7 @@ renamed as (
         shipping_service as shipping_service,
         shipping_cost AS shipping_cost_dollars,
         address_id,
-        created_at as created_at_utc,
+        {{convert_timezone('created_at')}} as created_at_utc,
         promo_id,
         estimated_delivery_at,
         order_cost,
@@ -23,7 +23,7 @@ renamed as (
         tracking_id,
         status,
         _fivetran_deleted,
-        _fivetran_synced AS date_load_utc
+        {{convert_timezone('_fivetran_synced')}} as date_load_utc
 
     from source
 )
