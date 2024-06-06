@@ -27,6 +27,7 @@ renamed as (
         O.ORDER_ID as order_id,
         P.product_id as product_id,
         o.user_id as user_id,
+        OI.QUANTITY,
         O.created_at_utc,
         O.delivered_at as delivered_at_utc,
         O.order_status_id as order_status_id,
