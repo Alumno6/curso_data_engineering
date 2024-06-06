@@ -12,6 +12,7 @@ renamed as (
         order_id,
         product_id,
         user_id,
+        QUANTITY,
         created_at_utc,
         delivered_at_utc,
         order_status_id,
